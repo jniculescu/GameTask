@@ -4,29 +4,29 @@ import express from "express";
 
 
 //luodaan express serveri projektille.
-const port: number = 3000
+const port: number = 3000;
 
 class App {
-    private server: http.Server
-    private port: number
+    private server: http.Server;
+    private port: number;
 
     constructor(port: number) {
-        this.port = port
-        const app = express()
-        app.use(express.static(path.join(__dirname, '../client')))
+        this.port = port;
+        const app = express();
+        app.use(express.static(path.join(__dirname, '../client')));
         app.use('/build/three.module.js', express.static(path.join(__dirname, '../../node_modules/three/build/three.module.js')));
-        // pixi? app.use('/build/pixi.js', express.static(path.join(__dirname, '../../node_modules/pixi.js/pixi.js')))
-        app.use('/jsm/controls/OrbitControls', express.static(path.join(__dirname, '../../node_modules/three/examples/jsm/controls/OrbitControls.js')));
+        app.use('/pixi.js/dist/pixi.js', express.static(path.join(__dirname, '../../node_modules/pixi.js/dist/pixi.js')));
         app.use('/jsm/loaders/GLTFLoader', express.static(path.join(__dirname, '../../node_modules/three/examples/jsm/loaders/GLTFLoader.js')));
-        
+        app.use('/jsm/controls/DragControls', express.static(path.join(__dirname, '../../node_modules/three/examples/jsm/controls/DragControls.js')));
+
         this.server = new http.Server(app);
     }
 
     public Start() {
         this.server.listen(this.port, () => {
-            console.log( `Server listening on port ${this.port}.` )
-        })
+            console.log( `Server listening on port ${this.port}.` );
+        });
     }
 }
 
-new App(port).Start()
+new App(port).Start();
