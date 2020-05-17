@@ -52,9 +52,6 @@ appPixi.stage.addChild(backGrndImg);*/
         
         //3dmodel and texture setup
         var textureLoader= new THREE.TextureLoader();
-        var texture = textureLoader.load("models/ninja.png");
-        texture.encoding = THREE.sRGBEncoding;
-        texture.flipY = true;
 
         //Load background texture
         textureLoader.load('img/swampland.jpg' , function(texture)
@@ -71,13 +68,16 @@ appPixi.stage.addChild(backGrndImg);*/
         var mat;
         var model;
 
+        //drag controller setup
         const draggables: THREE.Mesh[] = [];
         const controls = new DragControls(draggables, camera, renderer.domElement);
         controls.addEventListener("dragstart", function(event) {
-        event.object.material.opacity = 0.33;
+            event.object.material.opacity = 0.33;
+            console.log("start");
             });
         controls.addEventListener("dragend", function(event) {
-         event.object.material.opacity = 1;
+            event.object.material.opacity = 1;
+            console.log("end");
         });
 
         const loader = new GLTFLoader();
@@ -114,11 +114,6 @@ appPixi.stage.addChild(backGrndImg);*/
                 console.log(error);
             }
         );
-
-        controls.addEventListener( 'dragstart', function ( event ) {
-            console.log("start");
-            } );
-        controls.addEventListener( 'dragend', function ( event ) { console.log("end") } );
 
         //ninja model controls
        var x = 0;
@@ -182,7 +177,7 @@ loader.load(
 
         window.addEventListener('resize', onWindowResize, false);
     
-//reset camera and canvas size if changed
+//reset camera and canvas size if change in window
 function onWindowResize() {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
