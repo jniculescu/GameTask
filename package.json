@@ -16,7 +16,7 @@
     "pixi.js": "^5.2.4",
     "pixi.js-legacy": "^5.2.4",
     "requirejs": "^2.3.6",
-    "three": "^0.116.1"
+    "three": "^0.137.0"
   },
   "devDependencies": {
     "concurrently": "^5.2.0",
